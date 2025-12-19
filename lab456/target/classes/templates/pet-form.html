@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить питомца</title>
+</head>
+<body>
+<h2>Добавить питомца 💖</h2>
+
+<form th:action="@{/pets/new}" th:object="${pet}" method="post">
+    <!-- Text Input -->
+    <label>Имя: <input type="text" th:field="*{name}" /></label>
+    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color:red;"></span><br><br>
+
+    <label>Вид: <input type="text" th:field="*{species}" /></label><br><br>
+
+    <label>Возраст: <input type="number" th:field="*{age}" min="0" max="30" /></label><br><br>
+
+    <!-- Select (специалист) -->
+    <label>Специалист:
+        <select th:field="*{specialist.id}">
+            <option value="">--Выберите--</option>
+            <option th:each="s : ${specialists}" th:value="${s.id}" th:text="${s.fullName}"></option>
+        </select>
+    </label><br><br>
+
+    <!-- Checkbox (владельцы) -->
+    <label>Владельцы:</label><br>
+    <div th:each="owner : ${owners}">
+        <input type="checkbox" th:value="${owner.id}" name="owners" />
+        <span th:text="${owner.fullName}"></span><br>
+    </div><br>
+
+    <!-- Radio button (пол) -->
+    <label>Пол питомца:</label><br>
+    <input type="radio" name="gender" value="male" /> Мужской<br>
+    <input type="radio" name="gender" value="female" /> Женский<br><br>
+
+    <button type="submit">Сохранить</button>
+</form>
+
+<div th:if="${param.success}">
+    <p style="color:green;">✅ Питомец успешно добавлен!</p>
+</div>
+</body>
+</html>

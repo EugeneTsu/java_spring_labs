@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Тест API</title>
+</head>
+<body>
+<h2>Добавить питомца</h2>
+<button onclick="addPet()">Добавить Барсика</button>
+<div id="result"></div>
+
+<script>
+    async function addPet() {
+        const response = await fetch('/api/pets', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: "Барсик",
+                species: "Cat",
+                age: 3
+            })
+        });
+        const data = await response.json();
+        document.getElementById('result').innerText = 'Добавлено: ' + JSON.stringify(data);
+    }
+</script>
+</body>
+</html>

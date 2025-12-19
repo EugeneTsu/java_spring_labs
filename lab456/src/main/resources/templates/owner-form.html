@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить владельца</title>
+</head>
+<body>
+<h2>Добавить владельца 💖</h2>
+
+<form th:action="@{/owners/new}" th:object="${owner}" method="post">
+    <label>ФИО: <input type="text" th:field="*{fullName}" required /></label><br><br>
+
+    <label>Телефон: <input type="tel" th:field="*{phone}" required /></label><br><br>
+
+    <label>Email: <input type="email" th:field="*{email}" /></label><br><br>
+
+    <!-- Checkbox (пример дополнительного поля) -->
+    <label>
+        <input type="checkbox" name="notifications" value="true" />
+        Получать уведомления по SMS
+    </label><br><br>
+
+    <!-- Radio (пол владельца) -->
+    <label>Пол:</label><br>
+    <input type="radio" name="gender" value="female" /> Женский<br>
+    <input type="radio" name="gender" value="male" /> Мужской<br><br>
+
+    <button type="submit">Сохранить владельца</button>
+</form>
+
+<div th:if="${param.success}">
+    <p style="color:green;">✅ Владелец успешно добавлен!</p>
+</div>
+</body>
+</html>

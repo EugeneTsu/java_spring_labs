@@ -1,0 +1,18 @@
+### Добавить питомца
+POST http://localhost:8080/api/pets
+Content-Type: application/json
+
+{
+  "name": "Барсик",
+  "species": "Cat",
+  "age": 3
+}
+
+### Получить всех питомцев
+GET http://localhost:8080/api/pets
+
+### Получить питомца по ID (замени 1 на свой ID)
+GET http://localhost:8080/api/pets/1
+
+### Удалить питомца по ID (замени 1 на свой ID)
+DELETE http://localhost:8080/api/pets/1

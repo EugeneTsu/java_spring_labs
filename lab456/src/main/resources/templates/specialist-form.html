@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить специалиста</title>
+</head>
+<body>
+<h2>Добавить специалиста 💖</h2>
+
+<form th:action="@{/specialists/new}" th:object="${specialist}" method="post">
+    <label>ФИО: <input type="text" th:field="*{fullName}" required /></label><br><br>
+
+    <label>Специальность:
+        <select th:field="*{specialty}" required>
+            <option value="">--Выберите--</option>
+            <option value="Хирург">Хирург</option>
+            <option value="Терапевт">Терапевт</option>
+            <option value="Офтальмолог">Офтальмолог</option>
+            <option value="Дерматолог">Дерматолог</option>
+        </select>
+    </label><br><br>
+
+    <label>Телефон: <input type="tel" th:field="*{phone}" required /></label><br><br>
+
+    <label>
+        <input type="checkbox" name="onDuty" value="true" />
+        Сейчас на дежурстве
+    </label><br><br>
+
+    <label>Опыт работы:</label><br>
+    <input type="radio" name="experience" value="junior" /> До 3 лет<br>
+    <input type="radio" name="experience" value="middle" /> 3–7 лет<br>
+    <input type="radio" name="experience" value="senior" /> Более 7 лет<br><br>
+
+    <button type="submit">Сохранить специалиста</button>
+</form>
+
+<div th:if="${param.success}">
+    <p style="color:green;">✅ Специалист успешно добавлен!</p>
+</div>
+</body>
+</html>
